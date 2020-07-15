@@ -3,9 +3,11 @@ import React from 'react';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+       // this.state = {
+       //
+       // }
 
-        this.addUser = this.addUser.bind(this);
+       this.addUser = this.addUser.bind(this);
     }
 
     // Metodo post, para agregar valores a la API
@@ -17,7 +19,7 @@ export default class Form extends React.Component {
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(this.state.usuarios)
         })
             .then(response => response.json())
             .then(results => console.log(results))
@@ -33,10 +35,10 @@ export default class Form extends React.Component {
         return(
             <div>
                 <form onInput={this.handleInput} onSubmit={this.addUser}>
-                    <input type="text" placeholder="Nombre: "/> <br/>
-                    <input type="text" placeholder="Apellido: "/> <br/>
-                    <input type="text" placeholder="Email: "/> <br/>
-                    <input type="password" placeholder="Contraseña" /> <br/>
+                    <input name="name" type="text" placeholder="Nombre:" /> <br/>
+                    <input name="lastname" type="text" placeholder="Apellido: "/> <br/>
+                    <input name="email" type="email" placeholder="Email: "/> <br/>
+                    <input name="password" type="password" placeholder="Contraseña:" /> <br/>
                     <input type="submit"  value="Registrar" />
                 </form>
             </div>
