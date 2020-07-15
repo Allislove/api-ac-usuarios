@@ -3,10 +3,7 @@ import React from 'react';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
-       // this.state = {
-       //
-       // }
-
+        // this.state = {} // creo que no seria necesaria esta linea
        this.addUser = this.addUser.bind(this);
     }
 
@@ -19,7 +16,7 @@ export default class Form extends React.Component {
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify(this.state.usuarios)
+            body: JSON.stringify(this.state)
         })
             .then(response => response.json())
             .then(results => console.log(results))
