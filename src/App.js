@@ -36,7 +36,7 @@ class App extends React.Component {
     return (
         <div className="App">
             <h1> API - ADD USERS </h1>
-            <Form onInput={this.handleInput} onSubmit={this.addUser}/>
+            <Form />
 
             <div>
                 {this.state.usuarios.map(user => {
