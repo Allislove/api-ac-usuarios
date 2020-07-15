@@ -4,7 +4,8 @@ export default class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {} //me guardara los usuarios que ingresen en el formulario
-       this.addUser = this.addUser.bind(this);
+       // this.addUser = this.addUser.bind(this);
+
     }
 
     // Metodo post, para agregar valores a la API
