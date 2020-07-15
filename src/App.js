@@ -6,45 +6,53 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuarios: {}
-      // Creo un objeto vacio para meter los usuarios de la API
+        usuarios: [] // Creo un array vacio para meter los usuarios de la API
     }
   }
 
-    //Se ejecuta cuando se renderiza este componente
+  // Obtengo los datos de la api
     componentDidMount(){
-        let proxyUrl = 'https://cors-anywhere.herokuapp.com/',
-            targetUrl = 'https://academlo-api-users.herokuapp.com/users';
-        fetch(proxyUrl + targetUrl)
-            .then(blob => blob.json())
-            .then(data => {
-                console.table(data); // lo imprimo en una tabla
-                this.setState({usuarios: data});
-                console.log(data)
-                return data;
+        /* let proxyUrl = 'https://cors-anywhere.herokuapp.com/', Era un proxy para poder
+        acceder a la api:ya no tengo necesidad de
+         esto,
+         porque se arreglo desde la api
+        targetUrl = 'https://academlo-api-users.herokuapp.com/users'; */
+        let url = 'https://academlo-api-users.herokuapp.com/users'
+        fetch(url)
+            .then((response) => {
+                return response.json();
+                // console.log(response)
             })
-            .catch(e => {
-                console.log(e);
-                return e;
-            });
+            .then((myJson) => {
+                this.setState({usuarios: myJson.data});
+                console.log(myJson)
+            })
+            .catch(error => console.log(error));
     }
+
+
 
   render() {
     return (
         <div className="App">
-            <h1> Hello World </h1>
+            <h1> API - ADD USERS </h1>
+            <Form onInput={this.handleInput} onSubmit={this.addUser}/>
 
-
-            <p> Usuario: {this.state.usuarios.name} </p>
-            {/*console.log({this.state.usuarios.data});*/}
-
-            {/*console.log({this.state.usuarios.name});*/}
-            <Form />
+            <div>
+                {this.state.usuarios.map(user => {
+                    return (
+                        <div>
+                            <b>{user.name+ " "}</b>
+                            <b>{user.lastname + " "}</b>
+                            <b>{user.email + " "} </b>
+                            <b>{user.password + " "}</b> <br/>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
-
   }
-
 }
 
 export default App;
