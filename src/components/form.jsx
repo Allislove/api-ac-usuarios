@@ -3,7 +3,7 @@ import React from 'react';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {} // creo que no seria necesaria esta linea
+        this.state = {} //me guardara los usuarios que ingresen en el formulario
        this.addUser = this.addUser.bind(this);
     }
 
