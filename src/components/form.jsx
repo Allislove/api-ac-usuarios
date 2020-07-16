@@ -3,36 +3,54 @@ import React from 'react';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {} //me guardara los usuarios que ingresen en el formulario
-       // this.addUser = this.addUser.bind(this);
-
+        this.state = {
+            usersForm: {}
+        }
+        //me guardara los usuarios que ingresen en el formulario
     }
 
     // Metodo post, para agregar valores a la API
     addUser = event => {
         event.preventDefault();
         //Agregar un post
-        fetch("https://academlo-api-users.herokuapp.com/users", {
+        let url = "https://academlo-api-users.herokuapp.com/users";
+        let opciones = { // Creo una variable para manejar las opciones, de la peticion
             method: "POST",
             headers: {
-                "Content-Type": "application/json; charset=UTF-8"
+                "content-type": "application/json"
             },
-            body: JSON.stringify(this.state)
-        })
-            .then(response => response.json())
-            .then(results => console.log(results))
-            .catch(error => console.log(error));
+            body: JSON.stringify(this.state.usersForm)
+        };
+
+        fetch(url, opciones) // ahora hago la peticion con fetch
+            .then(response => {
+                return response.json;
+            })
+            .then(datos => {
+                console.log(datos);
+                this.props.obteniendoDatos();
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
     handleInput = event => {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({
+            usersForm: {
+                // generamos el nuevo estado, con un sprite operator, para que siempre que
+                // agreguemos un dato al formulario, se vayan guardando todos los datos
+                ...this.state.usersForm,
+                [event.target.name]: event.target.value
+            }
+        });
     };
 
 
     render() {
         return(
             <div>
-                <form onInput={this.handleInput} onSubmit={this.addUser}>
+                <form className="formUsuarios" onInput={this.handleInput} onSubmit={this.addUser}>
                     <input name="name" type="text" placeholder="Nombre:" /> <br/>
                     <input name="lastname" type="text" placeholder="Apellido: "/> <br/>
                     <input name="email" type="email" placeholder="Email: "/> <br/>
