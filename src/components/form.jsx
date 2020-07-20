@@ -1,5 +1,5 @@
 import React from 'react';
-
+// import EditForm from './edit-form';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -35,6 +35,7 @@ export default class Form extends React.Component {
             });
     };
 
+    //Recibimos los datos del nuevo usuario que sera añadido.
     handleInput = event => {
         this.setState({
             usersForm: {
@@ -47,17 +48,22 @@ export default class Form extends React.Component {
     };
 
 
+
     render() {
         return(
             <div>
-                <form className="formUsuarios" onInput={this.handleInput} onSubmit={this.addUser}>
+                <form  className="formUsuarios"  onInput={this.handleInput} onSubmit={this.addUser}>
                     <input name="name" type="text" placeholder="Nombre:" /> <br/>
                     <input name="lastname" type="text" placeholder="Apellido: "/> <br/>
                     <input name="email" type="email" placeholder="Email: "/> <br/>
                     <input name="password" type="password" placeholder="Contraseña:" /> <br/>
                     <input type="submit"  value="Registrar" />
                 </form>
+
+                {/*<EditForm />*/}
             </div>
+
+
         );
     }
 }
