@@ -86,41 +86,44 @@ class App extends React.Component {
 
     };
 
-
     render() {
         return (
-            <div className="App">
-                <h1> API ☺ </h1>
-                <div className="App-subcontent">
-                    <Form obteniendoDatos={this.obtenerDatos}
-                          handleInputEdit={this.handleInputEdit}
-                          updateUser={this.updateUser}
-                    />
-                    <EditForm user={this.state.userEdited}
-                              updateUser={this.updateUser}
+            <div className="container justify-content-center mx-auto">
+                <h1 className="text-center"> API ☺ </h1>
+                <div className="row justify-content-center align-items-center mt-5 ">
+                    <div className="col-4">
+                        <Form obteniendoDatos={this.obtenerDatos}
                               handleInputEdit={this.handleInputEdit}
-                    />
+                              updateUser={this.updateUser}
+                        />
+                    </div>
+                    <div className="col-4">
+                        <EditForm user={this.state.userEdited}
+                                  updateUser={this.updateUser}
+                                  handleInputEdit={this.handleInputEdit}
+                        />
+                    </div>
+                    <div className="w-100"></div>
+                    {/*Le brinde un espacio luego de los formularios */}
 
                     {this.state.usuarios.map((user) => {
                         return (
                             // Key debe estar en el ancestro mas cercano para que no nos presente un
                             // warning
-                            <div className="container">
-                                <div className="usersCard ">
-                                    <div className="card-header" >
-                                    <div  className="card mt-3">
-                                        <p> {user.name} </p>
+                            <div className="card-group">
+                                <div className="card mt-4 ml-2 bg-dark text-white">
+                                    <div className="card-body">
+                                        <mark > {user.name} </mark>
                                         <p>{user.lastname} </p>
                                         <p>{user.email } </p>
                                         <p>{user.password } </p>
-                                        <input type="submit" value="Editar" onClick={() => {
-                                            this.editUser(user);}}  />
-                                        <input type="submit"  value="Borrar" onClick={() => {
-                                            this.deleteUser(user.id);}}/>
-                                 </div>
+                                        <input  className="btn btn-light mr-3" type="submit" value="Editar"
+                                                onClick={() => {this.editUser(user);}}  />
+                                        <input className="btn btn-danger" type="submit" value="Borrar"
+                                               onClick={() => {this.deleteUser(user.id);}}/>
+                                    </div>
                                 </div>
                             </div>
-                    </div>
                         );
                     })}
                 </div>

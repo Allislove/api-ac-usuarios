@@ -52,12 +52,13 @@ export default class Form extends React.Component {
     render() {
         return(
             <div>
-                <form  className="formUsuarios"  onInput={this.handleInput} onSubmit={this.addUser}>
+                <form onInput={this.handleInput} onSubmit={this.addUser}>
+                    <h3> Agregar Usuario </h3>
                     <input name="name" type="text" placeholder="Nombre:" /> <br/>
                     <input name="lastname" type="text" placeholder="Apellido: "/> <br/>
                     <input name="email" type="email" placeholder="Email: "/> <br/>
                     <input name="password" type="password" placeholder="Contraseña:" /> <br/>
-                    <input type="submit"  value="Registrar" />
+                    <input className="btn btn-success mt-2" type="submit"  value="Registrar" />
                 </form>
 
                 {/*<EditForm />*/}

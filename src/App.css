@@ -1,23 +1,23 @@
-.App {
-  text-align: center;
+/*.App {*/
+/*  text-align: center;*/
 
-}
+/*}*/
 
-.formUsuarios {
-  padding: 10px;
-  background-color: aliceblue;
-}
-
-
-.usersCard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* border: 1px solid; */
-  margin-top: 5px;
+/*.formUsuarios {*/
+/*  padding: 10px;*/
+/*  background-color: aliceblue;*/
+/*}*/
 
 
-}
+/*.usersCard {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  !* border: 1px solid; *!*/
+/*  margin-top: 5px;*/
+
+
+/*}*/
 
 
 /*.tableHeaders {*/
