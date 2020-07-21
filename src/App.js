@@ -7,7 +7,9 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         // Creo un estado y array vacio para meter los usuarios de la API
-        this.state = {usuarios: [], userEdited: {name: ''},
+        this.state = {
+            usuarios: [],
+            userEdited: { name: "", lastname: "", email: "", password: "" },
 
         };
     }
@@ -61,41 +63,26 @@ class App extends React.Component {
             },
             body: JSON.stringify(this.state.userEdited)
         })
-            .then((response) => {
-                this.editUser();
-                return response.json(); // Regresa una promesa
-
-            })
-            .then((results) => {
-                console.log(results);
-            })
-            .catch(error => console.log("error"));
+            .then(response => response.json())
+            .then(results => this.obtenerDatos())
+            .catch(error => console.log(error));
     }
 
     // Creo un metodo con una funcion flecha, en el callback le paso el usuario del usuario actual
-    editUser = (...user) => {
-        let userToEdit = "https://academlo-api-users.herokuapp.com/user/" + user;
-        if(userToEdit === true) {
-            this.setState({
-
-                ...this.state.userEdited,
-            })
-        }
-
-        console.log(userToEdit);
-
-    }
+    editUser = user => {
+        /* actualizamos el estado userEdited, con los valores de user, para
+        poder modificar asi luego sus atributos */
+            this.setState({userEdited: user});
+    };
 
 
     handleInputEdit = event => {
-        if(true) {
             this.setState({
                 userEdited : {
                     ...this.state.userEdited,
                     [event.target.name]: event.target.value
                 }
             });
-        }
 
     };
 
@@ -105,29 +92,35 @@ class App extends React.Component {
             <div className="App">
                 <h1> API ☺ </h1>
                 <div className="App-subcontent">
-                    <Form obteniendoDatos={this.obtenerDatos}/>
-                    <EditForm user={this.state.userEdited} updateUser={this.updateUser}
-                              editInput={this.handleInputEdit}  editUser={this.editUser}/>
+                    <Form obteniendoDatos={this.obtenerDatos}
+                          handleInputEdit={this.handleInputEdit}
+                          updateUser={this.updateUser}
+                    />
+                    <EditForm user={this.state.userEdited}
+                              updateUser={this.updateUser}
+                              handleInputEdit={this.handleInputEdit}
+                    />
 
                     {this.state.usuarios.map((user) => {
                         return (
                             // Key debe estar en el ancestro mas cercano para que no nos presente un
                             // warning
-                            <div className="usersCard">
-                                <mark> User →</mark>
-                                <div className="usersContent">
-                                    <p> {user.name} </p>
-                                    <p>{user.lastname} </p>
-                                    <p>{user.email } </p>
-                                    <p>{user.password } </p>
-                                    <input type="submit" value="Editar" onClick={() => {
-                                        this.editUser(user.id);}}  />
-                                    <input type="submit"  value="Borrar" onClick={() => {
-                                        this.deleteUser(user.id);}}/>
-
+                            <div className="container">
+                                <div className="usersCard ">
+                                    <div className="card-header" >
+                                    <div  className="card mt-3">
+                                        <p> {user.name} </p>
+                                        <p>{user.lastname} </p>
+                                        <p>{user.email } </p>
+                                        <p>{user.password } </p>
+                                        <input type="submit" value="Editar" onClick={() => {
+                                            this.editUser(user);}}  />
+                                        <input type="submit"  value="Borrar" onClick={() => {
+                                            this.deleteUser(user.id);}}/>
+                                 </div>
                                 </div>
-
                             </div>
+                    </div>
                         );
                     })}
                 </div>

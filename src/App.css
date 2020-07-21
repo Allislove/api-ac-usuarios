@@ -11,21 +11,14 @@
 
 .usersCard {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid; */
+  margin-top: 5px;
 
 
 }
 
-.usersContent {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  margin-top: 10px;
-  border: 1px solid;
-  text-align: center;
-}
 
 /*.tableHeaders {*/
 /*  border: 1px solid;*/
